@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+<div class="container">
+    <h1>Welcome Scouts and Athletes</h1>
+    <hr>
+    {% if user.is_authenticated %}
+    <h2>Welcome {{ user.first_name }}</h2>
+    <h3>Recommended Athletes:</h3>
+        {% for user in object_list %}
+            <li>{{ user.username }}</li>
+        {% empty %}
+            <p>No athletes found</p>
+        {% endfor %}
+    {% else %}
+    <div class="mt-4 p-5 bg-dark text-white rounded">
+        <a href="{% url 'api:login_page' %}" class="btn btn-primary">Log In</a>
+        <hr>
+        <p>Not a member? <a href="{% url 'api:signup_page' %}" class="btn btn-secondary">Sign Up</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock bodyblock %}

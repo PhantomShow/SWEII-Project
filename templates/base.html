@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <title>Project</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'api:home_page' %}">Home</a>
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="nav-link" href="#">My Profile</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'api:logout_page' %}">Log Out</a>
+                </li>
+                {% else %}
+                <li>
+                    <a class="nav-link" href="{% url 'api:login_page' %}">Log In</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'api:signup_page' %}">Sign Up</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a class="nav-link" href="#">Placeholder</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    {% block bodyblock %}
+    {% endblock bodyblock %}
+</body>
+</html>
