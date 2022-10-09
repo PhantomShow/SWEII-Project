@@ -5,13 +5,31 @@
     <h1>Welcome Scouts and Athletes</h1>
     <hr>
     {% if user.is_authenticated %}
-    <h2>Welcome {{ user.first_name }}</h2>
-    <h3>Recommended Athletes:</h3>
-        {% for user in object_list %}
-            <li>{{ user.username }}</li>
-        {% empty %}
-            <p>No athletes found</p>
-        {% endfor %}
+        <h2>Welcome {{ user.first_name }}</h2>
+        {% comment %} If Scout {% endcomment %}
+        {% if user.user_type == 0 %}
+            <h3>Recommended Athletes:</h3>
+            {% comment %} Show only Athletes for Scouts {% endcomment %}
+                {% for athlete in user_list %}
+                    {% if athlete.user_type == 1 %}
+                        <li><a href="user/{{athlete.id}}">{{ athlete.username }}</a></li>
+                    {% endif %}
+                {% empty %}
+                    <p>No athletes found</p>
+                {% endfor %}
+        {% endif %}
+        {% comment %} If Athlete {% endcomment %}
+        {% if user.user_type == 1 %}
+            <h3>Recommended Scouts:</h3>
+            {% comment %} Show only Scouts for Athletes {% endcomment %}
+                {% for scout in user_list %}
+                    {% if scout.user_type == 0 %}
+                        <li><a href="user/{{scout.id}}">{{ scout.username }}</a></li>
+                    {% endif %}
+                {% empty %}
+                    <p>No scouts found</p>
+                {% endfor %}
+        {% endif %}
     {% else %}
     <div class="mt-4 p-5 bg-dark text-white rounded">
         <a href="{% url 'api:login_page' %}" class="btn btn-primary">Log In</a>

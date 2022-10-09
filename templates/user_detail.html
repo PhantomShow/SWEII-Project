@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+
+<div class="mt-4 p-5 bg-dark text-white rounded">
+    <h1>My Profile</h1>
+    <h2>Details:</h2>
+    <p>Name: {{user.first_name}} {{user.last_name}}</p>
+</div>
+
+{% endblock bodyblock %}
