@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,16 +8,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/master.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> <!-- bulma idk how to import-->
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/css/fontawesome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"> 
     <title>Project</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="https://brand.fiu.edu/_assets/images/fiu-logo.png" width="112" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href = "{% url 'api:home_page' %}">
+              Home
+            </a>
+      
+            <a class="navbar-item">
+              Placeholder
+            </a>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+                {% if user.is_authenticated %}
+                <a class="button is-light" href = "{% url 'api:login_page' %}">
+                    My Profile
+                  </a>
+                  <a class="button is-light" href = "{% url 'api:logout_page' %}">
+                    Log Out
+                  </a>
+                {% else %}
+              <div class="buttons">
+                <a class="button is-primary" href = "{% url 'api:signup_page' %}">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light" href = "{% url 'api:login_page' %}">
+                  Log in
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <!-- <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'api:home_page' %}">Home</a>
             <ul class="navbar-nav ms-auto">
@@ -41,7 +92,7 @@
             </ul>
         </div>
 
-    </nav>
+    </nav> -->
     {% block bodyblock %}
     {% endblock bodyblock %}
 </body>
