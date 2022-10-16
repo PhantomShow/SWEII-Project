@@ -2,12 +2,55 @@
 {% load bootstrap5 %}
 
 {% block bodyblock %}
-<div class="container">
-    <h1>Log In</h1>
+<!-- <div class="container">
+    <h1>Test</h1>
     <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form %}
         <input type="submit" value="Login" class="btn btn-primary">
     </form>
-</div>
+</div> -->
+<section class="hero is-link is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <form method="POST" class="box">
+              {% csrf_token %}
+              <div class="field">
+                <label for="" class="label">Username</label>
+                <div class="control has-icons-left">
+                  <input type="text" class="input" required id = "id_username">
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="label">Password</label>
+                <div class="control has-icons-left">
+                  <input type="password" placeholder="*******" class="input" required id = "id_password">
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="" class="checkbox">
+                  <input type="checkbox">
+                 Remember me
+                </label>
+              </div>
+              <div class="field">
+                <!-- <input type="submit" value="Login" class="btn btn-primary"> -->
+                <button type="submit" value="Login"  class="button is-success">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock bodyblock %}
