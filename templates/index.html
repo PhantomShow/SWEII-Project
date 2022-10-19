@@ -2,7 +2,7 @@
 
 {% block bodyblock %}
 <div class="container">
-    <h1>Welcome Scouts and Athletes</h1>
+    <h1 class="welcome">Welcome Scouts and Athletes</h1>
     <hr>
     {% if user.is_authenticated %}
         <h2>Welcome {{ user.first_name }}</h2>
@@ -24,7 +24,7 @@
             {% comment %} Show only Scouts for Athletes {% endcomment %}
                 {% for scout in user_list %}
                     {% if scout.user_type == 0 %}
-                        <li><a href="user/{{scout.id}}">{{ scout.username }}</a></li>
+                        <li><a href="{% url 'api:user_detail' pk=scout.id %}">{{ scout.username }}</a></li>
                     {% endif %}
                 {% empty %}
                     <p>No scouts found</p>

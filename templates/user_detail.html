@@ -3,9 +3,9 @@
 {% block bodyblock %}
 
 <div class="mt-4 p-5 bg-dark text-white rounded">
-    <h1>My Profile</h1>
+    <h1>{{user_detail.username}}</h1>
     <h2>Details:</h2>
-    <p>Name: {{user.first_name}} {{user.last_name}}</p>
+    <p>{{user_detail.first_name}} {{user_detail.last_name}}</p>
 </div>
 
 {% endblock bodyblock %}
