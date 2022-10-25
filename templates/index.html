@@ -12,7 +12,7 @@
             {% comment %} Show only Athletes for Scouts {% endcomment %}
                 {% for athlete in user_list %}
                     {% if athlete.user_type == 1 %}
-                        <li><a href="user/{{athlete.id}}">{{ athlete.username }}</a></li>
+                        <li><a href="{{ athlete.get_absolute_url }}">{{ athlete.username }}</a></li>
                     {% endif %}
                 {% empty %}
                     <p>No athletes found</p>
@@ -24,7 +24,7 @@
             {% comment %} Show only Scouts for Athletes {% endcomment %}
                 {% for scout in user_list %}
                     {% if scout.user_type == 0 %}
-                        <li><a href="{% url 'api:user_detail' pk=scout.id %}">{{ scout.username }}</a></li>
+                        <li><a href="{{ scout.get_absolute_url }}">{{ scout.username }}</a></li>
                     {% endif %}
                 {% empty %}
                     <p>No scouts found</p>

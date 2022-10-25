@@ -1,7 +1,6 @@
-from random import choices
-from secrets import choice
 from django.contrib import auth
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -39,6 +38,9 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
     school = models.CharField(max_length=128, blank=True)
 
     user_type = models.PositiveSmallIntegerField(choices=user_type_choices)
+
+    def get_absolute_url(self):
+        return reverse("api:user_detail_page", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"@{self.username}"
