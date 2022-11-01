@@ -1,26 +1,28 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load widget_tweaks %}
 
 {% block bodyblock %}
-<div class="container">
+<!-- <div class="container">
     <h1>Test</h1>
     <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form %}
         <input type="submit" value="Login" class="btn btn-primary">
     </form>
-</div>
+</div> -->
 <section class="hero is-link is-fullheight">
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-            <form method="POST" class="box">
+            <form method="POST" class="box" action = ".">
               {% csrf_token %}
+              
               <div class="field">
                 <label for="" class="label">Username</label>
                 <div class="control has-icons-left">
-                  <input type="text" class="input" required id = "id_username">
+                  {% render_field form.username class+="input"%}
                   <span class="icon is-small is-left">
                     <i class="fa-solid fa-envelope"></i>
                   </span>
@@ -29,7 +31,7 @@
               <div class="field">
                 <label for="" class="label">Password</label>
                 <div class="control has-icons-left">
-                  <input type="password" placeholder="*******" class="input" required id = "id_password">
+                  {% render_field form.password class+="input"%}
                   <span class="icon is-small is-left">
                     <i class="fa-solid fa-lock"></i>
                   </span>

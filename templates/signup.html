@@ -1,15 +1,8 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load widget_tweaks %}
 
 {% block bodyblock %}
-<!-- <div class="container">
-    <h1>Sign Up</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit" value="Sign Up" class="btn btn-primary">
-    </form>
-</div> -->
 <section class="hero is-link is-fullheight">
     <div class="hero-body">
         <div class="container">
@@ -22,7 +15,8 @@
                                 <div class="field">
                                     <label class="label">First Name</label>
                                     <div class="control has-icons-left has-icons-right">
-                                        <input class="input" type="text" placeholder="First Name" id = "id_first_name">
+                                        <!-- <input class="input" type="text" placeholder="First Name" id = "id_first_name"> -->
+                                        {% render_field form.first_name class+="input" placeholder="First Name"%}
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-user"></i>
                                         </span>
@@ -36,7 +30,8 @@
                                 <div class="field">
                                     <label class="label">Last Name</label>
                                     <div class="control has-icons-left has-icons-right">
-                                        <input class="input" type="text" placeholder="Last Name" id = "id_last_name">
+                                        <!-- <input class="input" type="text" placeholder="Last Name" id = "id_last_name"> -->
+                                        {% render_field form.last_name class+="input" placeholder="Last Name"%}
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-user"></i>
                                         </span>
@@ -50,7 +45,8 @@
                         <div class="field">
                             <label class="label">Display Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="text" placeholder="Username" id = "id_username" required>
+                                <!-- <input class="input" type="text" placeholder="Username" id = "id_username" required> -->
+                                {% render_field form.username class+="input" placeholder="Username"%}
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
                                 </span>
@@ -63,7 +59,8 @@
                         <div class="field">
                             <label class="label">Email Address</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="email" placeholder="Email input" id = "id_email">
+                                <!-- <input class="input" type="email" placeholder="Email input" id = "id_email"> -->
+                                {% render_field form.email class+="input" placeholder="Email Address"%}
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-envelope"></i>
                                 </span>
@@ -73,7 +70,8 @@
                         <div class="field">
                             <label class="label">Password</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password" placeholder="Password" id = "id_password1">
+                                <!-- <input class="input" type="password" placeholder="Password" id = "id_password1"> -->
+                                {% render_field form.password1 class+="input" placeholder="Password"%}
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                 </span>
@@ -88,7 +86,8 @@
                         <div class="field">
                             <label class="label">Password confirmation</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password" placeholder="Password" id = "id_password2">
+                                <!-- <input class="input" type="password" placeholder="Password" id = "id_password2"> -->
+                                {% render_field form.password2 class+="input" placeholder="Password"%}
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                 </span>
@@ -99,12 +98,13 @@
                             <label class="label">Scout or Athlete?</label>
                             <div class="control">
                                 <div class="select" id = "id_user_type">
-                                    <select>
+                            {% render_field form.user_type class+="select"%}  
+                                    <!-- <select>
                                         <option>Select dropdown</option>
                                         <option>Scout</option>
                                         <option>Athlete</option>
-                                    </select>
-                                </div>
+                                    </select> -->
+                                <!-- </div> -->
                             </div>
                         </div>
                         <div class="field">
