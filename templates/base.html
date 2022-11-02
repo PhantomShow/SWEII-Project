@@ -67,32 +67,6 @@
           </div>
         </div>
       </nav>
-    <!-- <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'api:home_page' %}">Home</a>
-            <ul class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                <li>
-                    <a class="nav-link" href="#">My Profile</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{% url 'api:logout_page' %}">Log Out</a>
-                </li>
-                {% else %}
-                <li>
-                    <a class="nav-link" href="{% url 'api:login_page' %}">Log In</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{% url 'api:signup_page' %}">Sign Up</a>
-                </li>
-                {% endif %}
-                <li>
-                    <a class="nav-link" href="#">Placeholder</a>
-                </li>
-            </ul>
-        </div>
-
-    </nav> -->
     {% block bodyblock %}
     {% endblock bodyblock %}
 </body>
