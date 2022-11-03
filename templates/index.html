@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block bodyblock %}
-<section class="hero is-link is-fullheight">
-    <div class="hero-body">
-        <div class="container">
-            {% if user.is_authenticated %}
-            <h2 class="title">Welcome back {{ user.first_name }}</h2>
-            <div class="columns is-vcentered">
-                {% comment %} If Scout {% endcomment %}
-                {% if user.user_type == 0 %}
-                {% comment %} Show Athletes if scout {% endcomment %}
-                {% for athlete in user_list %}
-                {% if athlete.user_type == 1 %}
-                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+<script src="{% static 'js/index.js'%}"></script>
+{% if user.is_authenticated %}
+<div class="container">
+    <div id="main-feed" class="container">
+        <div id="activity-feed-header">
+            <div class="columns" id="header-columns">
+                <div class="column is-3 has-text-centered">
+                    <h3 class="title is-3">Suggested Accounts</h3>
+                </div>
+                <div class="column is-6 has-text-centered">
+                    <h3 class="title is-2">Social Feed</h3>
+                </div>
+            </div>
+        </div>
+        <div id="activity-feed">
+            <div class="columns">
+                <div class="column is-3" id="left-side-bar">
+                    {% if user.user_type == 0 %}
+                    {% comment %} Show Athletes if scout {% endcomment %}
+                    {% for athlete in user_list %}
+                    {% if athlete.user_type == 1 %}
+                    <!-- card for athletes -->
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
@@ -29,7 +39,8 @@
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4" style="color: black;"><a href="user/{{scout.pk}}/">{{athlete.first_name }} {{athlete.last_name }}</a></p>
+                                    <p class="title is-4" style="color: black;"><a
+                                            href="user/{{athlete.pk}}/">{{athlete.first_name }} {{athlete.last_name}}</a></p>
                                     <p class="subtitle is-6" style="color: black;">{{ athlete.username }}</p>
                                 </div>
                             </div>
@@ -41,17 +52,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                {% endif %}
-                {% empty %}
-                <p>No athletes found</p>
-                {% endfor %}
+                    <br></br>
+                    {% endif %}
+                    {% empty %}
+                    <p>No athletes found</p>
+                    {% endfor %}
 
-
-                {% elif user.user_type == 1 %}
-                {% for scout in user_list %}
-                {% if scout.user_type == 0 %}
-                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    {% elif user.user_type == 1 %}
+                    {% for scout in user_list %}
+                    {% if scout.user_type == 0 %}
+                    <!-- Cards for scouts -->
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
@@ -68,7 +78,8 @@
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4" style="color: black;"><a href="user/{{scout.pk}}/">{{scout.first_name }} {{scout.last_name }}</a></p>
+                                    <p class="title is-4" style="color: black;"><a
+                                            href="user/{{scout.pk}}/">{{scout.first_name }} {{scout.last_name }}</a></p>
                                     <p class="subtitle is-6" style="color: black;">{{ scout.username }}</p>
                                 </div>
                             </div>
@@ -80,49 +91,128 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                {% endif %}
-                {% empty %}
-                <p>No scouts found</p>
-                {% endfor %}
+                    <br></br>
+                    {%endif%}
+                    {% empty %}
+                    <p>No scouts found</p>
+                    {% endfor %}
 
-                {% endif %}
-                {% else %}
-                <section class="hero is-fullheight is-default is-bold">
-                    <div class="hero-body">
-                        <div class="container has-text-centered">
-                            <div class="columns is-vcentered">
-                                <div class="column is-5">
-                                    <figure class="image is-4by3">
-                                        <img src="https://picsum.photos/800/600/?random" alt="Description">
-                                    </figure>
-                                </div>
-                                <div class="column is-6 is-offset-1">
-                                    <h1 class="title is-2">
-                                        Whatever our site is called
-                                    </h1>
-                                    <h2 class="subtitle is-4">
-                                        Random photos.
-                                    </h2>
-                                    <br>
-                                    <p class="has-text-centered">
-                                        <a class="button is-medium is-info is-outlined">
-                                            Learn more
-                                        </a>
-                                    </p>
-                                </div>
+                    {% endif %}
+                    <br>
+                </div>
+                <div class="column is-6" id="social-feed-columns">
+                    <!-- post section -->
+                    <div class="card">
+                        <div class="card-content">
+                            <textarea class="textarea is-info" placeholder="Write a post..."></textarea>
+                        </div>
+                        <footer class="card-footer">
+                            <div class="card-footer-item">
+                                <div class="button is-rounded">Create Post</div>
+                            </div>
+                            <div class="card-footer-item">
+                                <div class="button is-rounded">Add Media</div>
+                            </div>
+                            <div class="card-footer-item">
+                                <div class="button is-rounded">...</div>
+                            </div>
+                        </footer>
+                    </div>
+                    <br>
+                    <!-- generated posts -->
+                    <div class="box message-preview">
+                        <div class="top">
+                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="address">
+                                <div>John Doe</div>
+                                <div>@username</div>
+                            </div>
+                            <hr>
+                            <div class="content">
+                                <p>Random post here.</p><br>
+                                <p></p>
                             </div>
                         </div>
                     </div>
-                </section>
-                <!-- <div class="mt-4 p-5 bg-dark text-white rounded">
-                        <a href="{% url 'api:login_page' %}" class="btn btn-primary">Log In</a>
-                        <hr>
-                        <p>Not a member? <a href="{% url 'api:signup_page' %}" class="btn btn-secondary">Sign Up</a></p>
-                    </div> -->
+
+                    <div class="box message-preview">
+                        <div class="top">
+                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="address">
+                                <div>John Doe</div>
+                                <div>@username</div>
+                            </div>
+                            <hr>
+                            <div class="content">
+                                <p>Random post here.</p><br>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box message-preview">
+                        <div class="top">
+                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="address">
+                                <div>John Doe</div>
+                                <div>@username</div>
+                            </div>
+                            <hr>
+                            <div class="content">
+                                <p>Random post here.</p><br>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box message-preview">
+                        <div class="top">
+                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="address">
+                                <div>John Doe</div>
+                                <div>@username</div>
+                            </div>
+                            <hr>
+                            <div class="content">
+                                <p>Random post here.</p><br>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
             </div>
-            {% endif %}
         </div>
     </div>
-</section>
+    {% else %}
+    <section class="hero is-fullheight is-default is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-vcentered">
+                    <div class="column is-5">
+                        <figure class="image is-4by3">
+                            <img src="https://picsum.photos/800/600/?random" alt="Description">
+                        </figure>
+                    </div>
+                    <div class="column is-6 is-offset-1">
+                        <h1 class="title is-2">
+                            Whatever our site is called
+                        </h1>
+                        <h2 class="subtitle is-4">
+                            Random photos.
+                        </h2>
+                        <br>
+                        <p class="has-text-centered">
+                            <a class="button is-medium is-info is-outlined">
+                                Learn more
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+
 {% endblock bodyblock %}
