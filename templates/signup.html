@@ -10,7 +10,9 @@
                 <div class="column is-5-tablet">
                     <form class="box" method="POST">
                         {% csrf_token %}
-                        <div class="columns">
+                        {% bootstrap_form form %}
+                        <input type="submit" value="Sign Up" class="btn btn-primary">
+                        {% comment %} <div class="columns">
                             <div class="column">
                                 <div class="field">
                                     <label class="label">First Name</label>
@@ -108,20 +110,30 @@
                             </div>
                         </div>
                         <div class="field">
-                            <label class="label">Height</label>
+                            <label class="label">Height ft:</label>
                             <div class="control">
                                 <div class="select" id = "id_user_type">
                                     <select>
-                                        <option>Select dropdown</option>
-                                        <option>Scout</option>
-                                        <option>Athlete</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
                                     </select>
                                 </div>
                                 <div class="select" id = "id_user_type">
                                     <select>
-                                        <option>Select dropdown</option>
-                                        <option>Scout</option>
-                                        <option>Athlete</option>
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
                                     </select>
                                 </div>
                             </div>
@@ -143,7 +155,7 @@
                             <div class="control">
                                 <button class="button is-link is-light">Cancel</button>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
 
                     </form>
                 </div>
