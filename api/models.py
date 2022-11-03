@@ -1,7 +1,6 @@
-from random import choices
-from secrets import choice
 from django.contrib import auth
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -11,8 +10,37 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
         (0, 'Scout'),
         (1, 'Athlete'),
     )
+    height_foot_options = (
+        (4, '4'),
+        (5, '5'),
+        (6, '6'), 
+        (7, '7'),
+    )
+    height_inch_options = (
+        (0, '0'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'), 
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+        (11, '11'),
+        (12, '12'),
+    )
+
+    weight_lb = models.IntegerField(default=140)
+    height_ft = models.IntegerField(choices=height_foot_options, default=5)
+    height_in = models.IntegerField(choices=height_inch_options, default=6)
+    school = models.CharField(max_length=128, blank=True)
 
     user_type = models.PositiveSmallIntegerField(choices=user_type_choices)
+
+    def get_absolute_url(self):
+        return reverse("api:user_detail_page", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"@{self.username}"
