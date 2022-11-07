@@ -97,10 +97,12 @@
               <br>
               <span class='title-is-size-4'>@{{user_detail.username}}</span>
               <br>
-              <a class='button is-primary is-outlined' href="{% url 'api:update_user_page' pk=user.pk %}" id='edit-profile' style='margin: 5px 0'>
-                Edit Profile
-              </a>
-              <br>
+              {% if user.pk == user_detail.pk %} <!-- Only user can change his own profile -->
+                <a class='button is-primary is-outlined' href="{% url 'api:update_user_page' pk=user.pk %}" id='edit-profile' style='margin: 5px 0'>
+                  Edit Profile
+                </a>
+                <br>
+              {% endif %}
             </p>
             <p class='tagline'>
               The users profile bio would go here, of course. It could be two lines or more or whatever. We should probably limit the amount of characters to ~500 at most though.
