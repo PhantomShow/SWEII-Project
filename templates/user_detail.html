@@ -83,7 +83,12 @@
         <div class='columns is-mobile is-multiline'>
           <div class='column is-2'>
             <span class='header-icon user-profile-image'>
-              <img alt='' src='https://via.placeholder.com/250'>
+              {% comment %} <img alt='' src='https://via.placeholder.com/250'> {% endcomment %}
+              {% if user_detail.profile_pic %}
+                <img src="{{ user_detail.profile_pic.url }}" alt="not found">
+              {% else %}
+                <img src='https://via.placeholder.com/250' alt="not found">
+              {% endif %}
             </span>
           </div>
           <div class='column is-4-tablet is-10-mobile name'>
@@ -92,8 +97,8 @@
               <br>
               <span class='title-is-size-4'>@{{user_detail.username}}</span>
               <br>
-              <a class='button is-primary is-outlined' href='#' id='edit-preferences' style='margin: 5px 0'>
-                Edit Preferences
+              <a class='button is-primary is-outlined' href="{% url 'api:update_user_page' pk=user.pk %}" id='edit-profile' style='margin: 5px 0'>
+                Edit Profile
               </a>
               <br>
             </p>

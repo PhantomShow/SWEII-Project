@@ -26,16 +26,22 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="http://www.concordmonitor.com/getattachment/25e58fdc-e73a-45ed-ad2f-9f41245ad708/attachment.aspx"
-                                    alt="Placeholder image">
+                                {% if athlete.profile_pic %}
+                                    <img class="profile-pic" src="{{ athlete.profile_pic.url }}"
+                                {% else %}
+                                    <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                {% endif %}
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image is-48x48">
-                                        <img src="https://pbs.twimg.com/profile_images/1097806413127208961/v_V-XD3U_400x400.jpg"
-                                            alt="Placeholder image">
+                                        {% if athlete.profile_pic %}
+                                            <img class="profile-pic" src="{{ athlete.profile_pic.url }}"
+                                        {% else %}
+                                            <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                        {% endif %}
                                     </figure>
                                 </div>
                                 <div class="media-content">
@@ -65,16 +71,22 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="http://www.concordmonitor.com/getattachment/25e58fdc-e73a-45ed-ad2f-9f41245ad708/attachment.aspx"
-                                    alt="Placeholder image">
+                                {% if scout.profile_pic %}
+                                    <img class="profile-pic" src="{{ scout.profile_pic.url }}"
+                                {% else %}
+                                    <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                {% endif %}
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image is-48x48">
-                                        <img src="https://pbs.twimg.com/profile_images/1097806413127208961/v_V-XD3U_400x400.jpg"
-                                            alt="Placeholder image">
+                                        {% if scout.profile_pic %}
+                                            <img class="profile-pic" src="{{ scout.profile_pic.url }}"
+                                        {% else %}
+                                            <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                        {% endif %}
                                     </figure>
                                 </div>
                                 <div class="media-content">

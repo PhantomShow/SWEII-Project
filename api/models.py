@@ -36,8 +36,9 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
     height_ft = models.IntegerField(choices=height_foot_options, default=5)
     height_in = models.IntegerField(choices=height_inch_options, default=6)
     school = models.CharField(max_length=128, blank=True)
+    profile_pic = models.ImageField(null=True, blank=True)
 
-    user_type = models.PositiveSmallIntegerField(choices=user_type_choices)
+    user_type = models.PositiveSmallIntegerField(null=True, choices=user_type_choices)
 
     def get_absolute_url(self):
         return reverse("api:user_detail_page", kwargs={"pk": self.pk})

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from . import forms
 from . import models
@@ -23,3 +23,9 @@ class SignUp(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
+
+class UpdateUser(UpdateView):
+    model = models.CustomUser
+    form_class = forms.UserEditForm
+    success_url = reverse_lazy('api:home_page')
+    template_name = 'user_update.html'
