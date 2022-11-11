@@ -164,4 +164,16 @@
         </div>
     </div>
 </section>
+
+{% comment %} Tried to use JS to hide choices {% endcomment %}
+{% comment %} <script>
+    $("#id_user_type").change(function() {
+        if ($(this).val() == 'Athlete') {
+            $('#id_height_ft').show();
+        }
+        else {
+            $('#id_height_ft').hide();
+        }
+    })
+</script> {% endcomment %}
 {% endblock bodyblock %}

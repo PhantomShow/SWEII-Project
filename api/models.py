@@ -32,11 +32,12 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
         (12, '12'),
     )
 
-    weight_lb = models.IntegerField(default=140)
-    height_ft = models.IntegerField(choices=height_foot_options, default=5)
-    height_in = models.IntegerField(choices=height_inch_options, default=6)
+    weight_lb = models.IntegerField(default=140, blank=True)
+    height_ft = models.IntegerField(choices=height_foot_options, default=5, blank=True)
+    height_in = models.IntegerField(choices=height_inch_options, default=6, blank=True)
     school = models.CharField(max_length=128, blank=True)
     profile_pic = models.ImageField(null=True, blank=True)
+    bio = models.TextField(null=True, blank=True, default="No biography")
 
     user_type = models.PositiveSmallIntegerField(null=True, choices=user_type_choices)
 

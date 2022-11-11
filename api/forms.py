@@ -5,7 +5,7 @@ from django.forms import ModelForm
 class UserCreateForm(UserCreationForm):
     class Meta:
         fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name', 
-            'user_type', 'height_ft', 'height_in', 'profile_pic')
+            'user_type', 'height_ft', 'height_in','weight_lb', 'profile_pic')
         model = get_user_model()
     
     def __init__(self, *args, **kwargs):
@@ -16,5 +16,9 @@ class UserCreateForm(UserCreationForm):
 
 class UserEditForm(ModelForm):
     class Meta:
-        fields = ('first_name', 'last_name', 'school', 'height_ft', 'height_in', 'profile_pic')
+        fields = ('first_name', 'last_name', 'school', 'height_ft', 'height_in', 'weight_lb', 'bio', 'profile_pic')
         model = get_user_model()
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['bio'].label = 'Biography'
