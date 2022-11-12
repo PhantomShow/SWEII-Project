@@ -10,9 +10,9 @@
                 <div class="column is-5-tablet">
                     <form class="box" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% bootstrap_form form %}
-                        <input type="submit" value="Sign Up" class="btn btn-primary">
-                        {% comment %} <div class="columns">
+                        {% comment %} {% bootstrap_form form %} {% endcomment %}
+                        {% comment %} <input type="submit" value="Sign Up" class="btn btn-primary"> {% endcomment %}
+                        <div class="columns">
                             <div class="column">
                                 <div class="field">
                                     <label class="label">First Name</label>
@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="field">
+                        <div class="field", id='choice'>
                             <label class="label">Scout or Athlete?</label>
                             <div class="control">
                                 <div class="select" id = "id_user_type">
@@ -109,7 +109,7 @@
                                 <!-- </div> -->
                             </div>
                         </div>
-                        <div class="field">
+                        <div class="field" id='height'>
                             <label class="label">Height ft:</label>
                             <div class="control">
                                 <div class="select" id = "id_user_type">
@@ -155,7 +155,7 @@
                             <div class="control">
                                 <button class="button is-link is-light">Cancel</button>
                             </div>
-                        </div> {% endcomment %}
+                        </div>
 
                     </form>
                 </div>
@@ -166,14 +166,14 @@
 </section>
 
 {% comment %} Tried to use JS to hide choices {% endcomment %}
-{% comment %} <script>
-    $("#id_user_type").change(function() {
+<script>
+    $("#choice").change(function() {
         if ($(this).val() == 'Athlete') {
-            $('#id_height_ft').show();
+            $('#height').show();
         }
         else {
-            $('#id_height_ft').hide();
+            $('#height').hide();
         }
     })
-</script> {% endcomment %}
+</script>
 {% endblock bodyblock %}
