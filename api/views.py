@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
 from . import models
@@ -24,8 +25,18 @@ class SignUp(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
+
 class UpdateUser(UpdateView):
     model = models.CustomUser
     form_class = forms.UserEditForm
     success_url = reverse_lazy('api:home_page')
     template_name = 'user_update.html'
+
+def search_results(request):
+    if request.method == 'POST':
+        target = request.POST['searchQueryInput']
+        users = models.CustomUser.objects.filter(username__contains=target)
+        return render(request, 'search_results.html', {'target':target, 'users':users})
+    
+    else:
+        return render(request, 'search_results.html', {})

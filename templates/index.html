@@ -115,18 +115,22 @@
                 </div>
                 <div class="column is-6" id="social-feed-columns">
                     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
+                    <!-- Search -->
                     <div class="box">
                         <div class="label">Search for user...</div>
-                        <div class="searchBar">
-                            <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search"
-                                value="" />
-                            <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
-                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                    <path fill="#666666"
-                                        />
-                                </svg>
-                            </button>
+                            <form method='POST' action="{% url 'api:search_results' %}">
+                                {% csrf_token %}
+                                <div class="searchBar">
+                                    <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search"
+                                        value="" />
+                                    {% comment %} <input type="submit" value="Search" class="btn btn-primary"/> {% endcomment %}
+                                    <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                            <path fill="#666666"
+                                                />
+                                        </svg>
+                                    </button>
+                            </form>
                         </div>
                     </div>
                     <!-- post section -->
