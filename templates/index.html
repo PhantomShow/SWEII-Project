@@ -2,6 +2,7 @@
 {% load static %}
 {% block bodyblock %}
 <script src="{% static 'js/index.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% if user.is_authenticated %}
 <div class="container">
     <div id="main-feed" class="container">
@@ -11,7 +12,10 @@
                     <h3 class="title is-3">Suggested Accounts</h3>
                 </div>
                 <div class="column is-6 has-text-centered">
-                    <h3 class="title is-2">Social Feed</h3>
+                    <h3 class="title is-3">Social Feed</h3>
+                </div>
+                <div class="column is-4 has-text-centered">
+                    <h3 class="title is-3">Chat Messanger</h3>
                 </div>
             </div>
         </div>
@@ -27,9 +31,8 @@
                         <div class="card-image">
                             <figure class="image is-4by3">
                                 {% if athlete.profile_pic %}
-                                    <img class="profile-pic" src="{{ athlete.profile_pic.url }}"
-                                {% else %}
-                                    <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                <img class="profile-pic" src="{{ athlete.profile_pic.url }}" {% else %} <img
+                                    class="profile-pic" src='https://via.placeholder.com/250'>
                                 {% endif %}
                             </figure>
                         </div>
@@ -38,15 +41,15 @@
                                 <div class="media-left">
                                     <figure class="image is-48x48">
                                         {% if athlete.profile_pic %}
-                                            <img class="profile-pic" src="{{ athlete.profile_pic.url }}"
-                                        {% else %}
-                                            <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                        <img class="profile-pic" src="{{ athlete.profile_pic.url }}" {% else %} <img
+                                            class="profile-pic" src='https://via.placeholder.com/250'>
                                         {% endif %}
                                     </figure>
                                 </div>
                                 <div class="media-content">
                                     <p class="title is-4" style="color: black;"><a
-                                            href="user/{{athlete.pk}}/">{{athlete.first_name }} {{athlete.last_name}}</a></p>
+                                            href="user/{{athlete.pk}}/">{{athlete.first_name }}
+                                            {{athlete.last_name}}</a></p>
                                     <p class="subtitle is-6" style="color: black;">{{ athlete.username }}</p>
                                 </div>
                             </div>
@@ -72,9 +75,8 @@
                         <div class="card-image">
                             <figure class="image is-4by3">
                                 {% if scout.profile_pic %}
-                                    <img class="profile-pic" src="{{ scout.profile_pic.url }}"
-                                {% else %}
-                                    <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                <img class="profile-pic" src="{{ scout.profile_pic.url }}" {% else %} <img
+                                    class="profile-pic" src='https://via.placeholder.com/250'>
                                 {% endif %}
                             </figure>
                         </div>
@@ -83,9 +85,8 @@
                                 <div class="media-left">
                                     <figure class="image is-48x48">
                                         {% if scout.profile_pic %}
-                                            <img class="profile-pic" src="{{ scout.profile_pic.url }}"
-                                        {% else %}
-                                            <img class="profile-pic" src='https://via.placeholder.com/250'>
+                                        <img class="profile-pic" src="{{ scout.profile_pic.url }}" {% else %} <img
+                                            class="profile-pic" src='https://via.placeholder.com/250'>
                                         {% endif %}
                                     </figure>
                                 </div>
@@ -113,6 +114,21 @@
                     <br>
                 </div>
                 <div class="column is-6" id="social-feed-columns">
+                    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+                    <div class="box">
+                        <div class="label">Search for user...</div>
+                        <div class="searchBar">
+                            <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search"
+                                value="" />
+                            <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="#666666"
+                                        />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                     <!-- post section -->
                     <div class="card">
                         <div class="card-content">
@@ -134,7 +150,8 @@
                     <!-- generated posts -->
                     <div class="box message-preview">
                         <div class="top">
-                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="avatar"><img src="https://via.placeholder.com/150"
+                                    style="max-width: 50px; border-radius: 50%;"></div>
                             <div class="address">
                                 <div>John Doe</div>
                                 <div>@username</div>
@@ -149,7 +166,8 @@
 
                     <div class="box message-preview">
                         <div class="top">
-                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="avatar"><img src="https://via.placeholder.com/150"
+                                    style="max-width: 50px; border-radius: 50%;"></div>
                             <div class="address">
                                 <div>John Doe</div>
                                 <div>@username</div>
@@ -163,7 +181,8 @@
                     </div>
                     <div class="box message-preview">
                         <div class="top">
-                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="avatar"><img src="https://via.placeholder.com/150"
+                                    style="max-width: 50px; border-radius: 50%;"></div>
                             <div class="address">
                                 <div>John Doe</div>
                                 <div>@username</div>
@@ -177,7 +196,8 @@
                     </div>
                     <div class="box message-preview">
                         <div class="top">
-                            <div class="avatar"><img src="https://via.placeholder.com/150" style = "max-width: 50px; border-radius: 50%;"></div>
+                            <div class="avatar"><img src="https://via.placeholder.com/150"
+                                    style="max-width: 50px; border-radius: 50%;"></div>
                             <div class="address">
                                 <div>John Doe</div>
                                 <div>@username</div>
@@ -189,9 +209,62 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
-
+                <div class="column is-4">
+                    <div class="box follow-scroll" style = "position: fixed; width: 25%;">
+                        <div class="message-head has-text-centered">
+                            <div>
+                                <div class="subtitle">Current users online</div>
+                                <!-- <select class = "select is-active">
+                                    {% for athlete in user_list %}
+                                    <option value="{{ athlete.id }}">{{ athlete.first_name }}</option>
+                                    {% endfor %}
+                                </select> -->
+                                <div class="select">
+                                    <select>
+                                        {% for user in user_list %}
+                                        <option value="{{ user.id }}">{{ user.username }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            <div style="width: 100%;">
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">hello</span></p>
+                                <p style="padding: 0.25em; text-align: right; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-info">hi!</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">do you want to chat?</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">do you want to chat?</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">do you want to chat?</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">hello</span></p>
+                                <p style="padding: 0.25em; text-align: right; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-info">hi!</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">do you want to chat?</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">hello</span></p>
+                                <p style="padding: 0.25em; text-align: right; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-info">hi!</span></p>
+                                <p style="padding: 0.25em; text-align: left; overflow-wrap: normal;"><span
+                                        class="tag is-medium is-success">do you want to chat?</span></p>
+                            </div>
+                        </div>
+                        <div class="message-foot">
+                            <div class="field has-addons">
+                                <div class="control is-expanded"><input type="text" class="input" name="userInput"
+                                        placeholder="Type your message"></div>
+                                <div class="control"><button class="button is-info">Send</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

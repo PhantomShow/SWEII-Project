@@ -3,6 +3,8 @@
 {% load widget_tweaks %}
 
 {% block bodyblock %}
+{% load static %}
+<script src="{% static 'js/signup.js' %}"></script>
 <section class="hero is-fullheight">
     <div class="hero-body">
         <div class="container">
@@ -109,35 +111,24 @@
                                 <!-- </div> -->
                             </div>
                         </div>
-                        <div class="field" id='height'>
-                            <label class="label">Height ft:</label>
+                        <div class="field" name='athleteInfo' style = "display:none;">
+                            <label class="label">Height:</label>
                             <div class="control">
-                                <div class="select" id = "id_user_type">
-                                    <select>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                    </select>
+                                <div class="select">
+                                    {% render_field form.height_ft class+="select"%}  
                                 </div>
-                                <div class="select" id = "id_user_type">
-                                    <select>
-                                        <option>0</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                    </select>
+                                <div class="select">
+                                    {% render_field form.height_in class+="select"%}  
                                 </div>
                             </div>
                         </div>
+
+                        <div class="field" name = "athleteInfo" style="display: none;">
+                            <label class="label">Weight</label>
+                            <div class="control">
+                                {% render_field form.weight_lb class+="input"%}  
+                            </div>
+                          </div>
                         
                         <div class="field">
                             <div class="control">
@@ -166,14 +157,4 @@
 </section>
 
 {% comment %} Tried to use JS to hide choices {% endcomment %}
-<script>
-    $("#choice").change(function() {
-        if ($(this).val() == 'Athlete') {
-            $('#height').show();
-        }
-        else {
-            $('#height').hide();
-        }
-    })
-</script>
 {% endblock bodyblock %}
