@@ -134,42 +134,8 @@
                         </div>
                     </div>                    
                     <!-- post section -->
-                    <!-- <form method="POST">
-                        {% csrf_token %}
-                        {% bootstrap_form form %}
-                        <input type="submit" value="Post" class="btn btn-primary"></input>
-                    </form> -->
-                    <div class='container'>
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            <input type="submit" value="Post" class="btn btn-primary">
-                        </form> 
-                    </div>
                     <div class="card">
-                        <!-- <div class="card-content">
-                            <textarea class="textarea is-info" placeholder="Write a post..."></textarea>
-                        </div> -->
                         <div class="card-content">
-                            <!-- <article class="media">
-                                <figure class="media-left">
-                                  <p class="image is-64x64 ">
-                                    {% if user_detail.profile_pic %}
-                                    <img class = "is-rounded" src="{{ user_detail.profile_pic.url }}" alt="not found">
-                                  {% else %}
-                                    <img class = "is-rounded" src='https://via.placeholder.com/250' alt="not found">
-                                  {% endif %}   
-                                  </p>
-                                </figure>
-                                <div class="media-content">
-                                  <div class="field">
-                                    <p class="control">
-                                      <textarea class="input is-large is-rounded" placeholder="Start a post"></textarea>
-                                    </p>
-                                  </div>
-                                  </nav>
-                                </div>
-                              </article> -->
                               <article class="media">
                                 <figure class="media-left">
                                   <p class="image is-64x64">
@@ -179,17 +145,20 @@
                                     <img class = "is-rounded" src='https://via.placeholder.com/250' alt="not found">
                                   {% endif %}                                     </p>
                                 </figure>
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
                                 <div class="media-content">
                                   <div class="field">
                                     <p class="control">
-                                      <textarea class="textarea" placeholder="Start a post"></textarea>
+                                      <!-- <textarea class="textarea" placeholder="Start a post"></textarea> -->
+                                      {% render_field form.text class+="input is-large" placeholder="Start a post"%}
                                     </p>
                                   </div>
                                   <nav class="level">
                                     <div class="level-left">
                                       <div class="level-item">
-                                        <a class="button is-info">Post</a>
-                                      </div>
+                                        <input type="submit" value="Post" class="button is-info">
+                                    </div>
                                     </div>
                                     <div class="level-right">
                                       <div class="level-item">
@@ -210,6 +179,7 @@
                                     </div>
                                   </nav>
                                 </div>
+                                </form>
                               </article>
                         </div>
                         <!-- <footer class="card-footer">
@@ -265,7 +235,15 @@
                     <article class="media">
                         <figure class="media-left">
                           <p class="image is-64x64">
-                            <img class = "is-rounded" src="{{ post.author.profile_pic.url }}">
+                            {% if post.author.profile_pic %}
+                            <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
+                                    style="max-width: 50px; border-radius: 50%;">
+                                </div>
+                            {% else %}
+                            <div class="avatar"><img src='https://via.placeholder.com/250'
+                                style="max-width: 50px; border-radius: 50%;">
+                            </div>
+                            {% endif %}
                           </p>
                         </figure>
                         <div class="media-content box">
