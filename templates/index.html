@@ -139,11 +139,11 @@
                               <article class="media">
                                 <figure class="media-left">
                                   <p class="image is-64x64">
-                                    {% if user_detail.profile_pic %}
-                                    <img class = "is-rounded" src="{{ user_detail.profile_pic.url }}" alt="not found">
-                                  {% else %}
+                                    {% if user.profile_pic %}
+                                    <img class = "is-rounded" src="{{ user.profile_pic.url }}" alt="not found">
+                                    {% else %}
                                     <img class = "is-rounded" src='https://via.placeholder.com/250' alt="not found">
-                                  {% endif %}                                     </p>
+                                    {% endif %}                                     </p>
                                 </figure>
                                 <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
