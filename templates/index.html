@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 {% load static %}
 {% block bodyblock %}
 <script src="{% static 'js/index.js'%}"></script>
@@ -131,7 +132,13 @@
                         </div>
                     </div>                    
                     <!-- post section -->
-                    
+                    <div class='container'>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <input type="submit" value="Post" class="btn btn-primary">
+                        </form> 
+                    </div>
                     <div class="card">
                         <div class="card-content">
                             <textarea class="textarea is-info" placeholder="Write a post..."></textarea>
@@ -153,9 +160,15 @@
                     {% for post in posts %}
                     <div class="box message-preview">
                         <div class="top">
+                            {% if post.author.profile_pic %}
                             <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
                                     style="max-width: 50px; border-radius: 50%;">
                                 </div>
+                            {% else %}
+                            <div class="avatar"><img src='https://via.placeholder.com/250'
+                                style="max-width: 50px; border-radius: 50%;">
+                            </div>
+                            {% endif %}
                             <div class="address">
                                 <div>{{post.author.first_name}} {{post.author.last_name}}</div>
                                 <div>{{post.author}}</div>
