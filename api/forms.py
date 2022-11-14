@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
+from .models import Post
 
 class UserCreateForm(UserCreationForm):
     class Meta:
@@ -22,3 +23,8 @@ class UserEditForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args,**kwargs)
         self.fields['bio'].label = 'Biography'
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ('text',)

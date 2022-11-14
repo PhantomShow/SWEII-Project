@@ -11,6 +11,15 @@ class HomePage(ListView):
     template_name = 'index.html'
     context_object_name = 'user_list'
 
+    # This makes it possible to have both a user_list, posts list, and form in one view
+    def get_context_data(self, **kwargs):
+        context = super(HomePage, self).get_context_data(**kwargs)
+        context.update({
+            'posts': models.Post.objects.all().order_by('-create_date'), # Newest first
+            'form': forms.PostForm,
+        })
+        return context
+
 class UserDetail(DetailView):
     model = models.CustomUser
     template_name = 'user_detail.html'
@@ -24,7 +33,6 @@ class SignUp(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
-
 
 class UpdateUser(UpdateView):
     model = models.CustomUser
