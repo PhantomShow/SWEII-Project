@@ -2,6 +2,8 @@
 {% load bootstrap5 %}
 {% load static %}
 {% block bodyblock %}
+{% load bootstrap5 %}
+{% load widget_tweaks %}
 <script src="{% static 'js/index.js'%}"></script>
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
@@ -132,6 +134,11 @@
                         </div>
                     </div>                    
                     <!-- post section -->
+                    <!-- <form method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <input type="submit" value="Post" class="btn btn-primary"></input>
+                    </form> -->
                     <div class='container'>
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -140,10 +147,72 @@
                         </form> 
                     </div>
                     <div class="card">
-                        <div class="card-content">
+                        <!-- <div class="card-content">
                             <textarea class="textarea is-info" placeholder="Write a post..."></textarea>
+                        </div> -->
+                        <div class="card-content">
+                            <!-- <article class="media">
+                                <figure class="media-left">
+                                  <p class="image is-64x64 ">
+                                    {% if user_detail.profile_pic %}
+                                    <img class = "is-rounded" src="{{ user_detail.profile_pic.url }}" alt="not found">
+                                  {% else %}
+                                    <img class = "is-rounded" src='https://via.placeholder.com/250' alt="not found">
+                                  {% endif %}   
+                                  </p>
+                                </figure>
+                                <div class="media-content">
+                                  <div class="field">
+                                    <p class="control">
+                                      <textarea class="input is-large is-rounded" placeholder="Start a post"></textarea>
+                                    </p>
+                                  </div>
+                                  </nav>
+                                </div>
+                              </article> -->
+                              <article class="media">
+                                <figure class="media-left">
+                                  <p class="image is-64x64">
+                                    {% if user_detail.profile_pic %}
+                                    <img class = "is-rounded" src="{{ user_detail.profile_pic.url }}" alt="not found">
+                                  {% else %}
+                                    <img class = "is-rounded" src='https://via.placeholder.com/250' alt="not found">
+                                  {% endif %}                                     </p>
+                                </figure>
+                                <div class="media-content">
+                                  <div class="field">
+                                    <p class="control">
+                                      <textarea class="textarea" placeholder="Start a post"></textarea>
+                                    </p>
+                                  </div>
+                                  <nav class="level">
+                                    <div class="level-left">
+                                      <div class="level-item">
+                                        <a class="button is-info">Post</a>
+                                      </div>
+                                    </div>
+                                    <div class="level-right">
+                                      <div class="level-item">
+                                        <div class="file">
+                                            <label class="file-label">
+                                              <input class="file-input" type="file" name="photos">
+                                              <span class="file-cta">
+                                                <span class="file-icon">
+                                                  <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                  Upload an image...
+                                                </span>
+                                              </span>
+                                            </label>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </nav>
+                                </div>
+                              </article>
                         </div>
-                        <footer class="card-footer">
+                        <!-- <footer class="card-footer">
                             <div class="card-footer-item">
                                 <div class="button is-rounded">Create Post</div>
                             </div>
@@ -153,12 +222,12 @@
                             <div class="card-footer-item">
                                 <div class="button is-rounded">...</div>
                             </div>
-                        </footer>
+                        </footer> -->
                     </div>
                     <br>
                     <!-- generated posts -->
                     {% for post in posts %}
-                    <div class="box message-preview">
+                    <!-- <div class="box message-preview">
                         <div class="top">
                             {% if post.author.profile_pic %}
                             <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
@@ -177,9 +246,50 @@
                             <div class="content">
                                 <p>{{post.text}}</p><br>
                                 <p>{{post.create_date}}</p>
+                                <nav class="level is-mobile">
+                                    <div class="level-left">
+                                      <a class="level-item">
+                                        <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                      </a>
+                                      <a class="level-item">
+                                        <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                                      </a>
+                                      <a class="level-item">
+                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                      </a>
+                                    </div>
+                                  </nav>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <article class="media">
+                        <figure class="media-left">
+                          <p class="image is-64x64">
+                            <img class = "is-rounded" src="{{ post.author.profile_pic.url }}">
+                          </p>
+                        </figure>
+                        <div class="media-content box">
+                          <div class="content">
+                            <p>
+                              <strong>{{post.author.first_name}} {{post.author.last_name}}</strong> <small>{{post.author}}</small> <small>{{post.create_date}}</small>
+                              <br>
+                              {{post.text}}                            </p>
+                          </div>
+                          <nav class="level is-mobile">
+                            <div class="level-left">
+                              <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                              </a>
+                              <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                              </a>
+                              <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                              </a>
+                            </div>
+                          </nav>
+                        </div>
+                      </article>
                     {% endfor %}
                 </div>
                 <div class="column is-4">
