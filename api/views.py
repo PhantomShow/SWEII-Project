@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
@@ -23,7 +23,7 @@ from . import models
 
 def home_page(request):
     user_list = models.CustomUser.objects.all()
-    posts = models.Post.objects.all()
+    posts = models.Post.objects.all().order_by('-create_date')
 
     if request.method == 'POST':
         form = forms.PostForm(request.POST)
@@ -42,9 +42,13 @@ class UserDetail(DetailView):
     template_name = 'user_detail.html'
     context_object_name = 'user_detail'
 
-    # Causing details to be empty for some reason ?
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
+    # This makes it possible to have both a user_detail and user_posts in one view
+    def get_context_data(self, **kwargs):
+        context = super(UserDetail, self).get_context_data(**kwargs)
+        context.update({
+            'user_posts': models.Post.objects.filter(author=context['user_detail']).order_by('-create_date'), # Newest first
+        })
+        return context
 
 class SignUp(CreateView):
     form_class = forms.UserCreateForm
@@ -56,6 +60,12 @@ class UpdateUser(UpdateView):
     form_class = forms.UserEditForm
     success_url = reverse_lazy('api:home_page')
     template_name = 'user_update.html'
+
+class DeletePost(DeleteView):
+    model = models.Post
+    success_url = reverse_lazy('api:home_page')
+    # context_object_name = 'post'
+    template_name = 'post_delete.html'
 
 def search_results(request):
     if request.method == 'POST':

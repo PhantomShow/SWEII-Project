@@ -102,7 +102,7 @@
                             <label class="label">Scout or Athlete?</label>
                             <div class="control">
                                 <div class="select" id = "id_user_type">
-                            {% render_field form.user_type class+="select"%}  
+                                    {% render_field form.user_type class+="select"%}  
                                     <!-- <select>
                                         <option>Select dropdown</option>
                                         <option>Scout</option>
@@ -111,22 +111,36 @@
                                 <!-- </div> -->
                             </div>
                         </div>
-                        <div class="field" name='athleteInfo' style = "display:none;">
-                            <label class="label">Height:</label>
-                            <div class="control">
-                                <div class="select">
-                                    {% render_field form.height_ft class+="select"%}  
+
+
+                        <div class='columns'>
+                            <div class='column'>
+                                <div class="field" name='athleteInfo' style = "display:none;">
+                                    <label class="label">Height (ft, in)</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            {% render_field form.height_ft class+="select"%}  
+                                        </div>
+                                        <div class="select">
+                                            {% render_field form.height_in class+="select"%}  
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="select">
-                                    {% render_field form.height_in class+="select"%}  
-                                </div>
+                            </div>
+                            <div class='column'>
+                                <div class="field" name = "athleteInfo" style="display: none;">
+                                    <label class="label">Weight (lbs)</label>
+                                    <div class="control">
+                                        {% render_field form.weight_lb class+="input"%}  
+                                    </div>
+                                  </div>
                             </div>
                         </div>
 
                         <div class="field" name = "athleteInfo" style="display: none;">
-                            <label class="label">Weight</label>
+                            <label class="label">GPA (4.00 Scale)</label>
                             <div class="control">
-                                {% render_field form.weight_lb class+="input"%}  
+                                {% render_field form.gpa class+="input"%}  
                             </div>
                           </div>
                         

@@ -249,7 +249,8 @@
                         <div class="media-content box">
                           <div class="content">
                             <p>
-                              <strong>{{post.author.first_name}} {{post.author.last_name}}</strong> <small>{{post.author}}</small> <small>{{post.create_date}}</small>
+                              <strong><a href="{{post.author.get_absolute_url}}"> {{post.author.first_name}} {{post.author.last_name}} </a></strong> 
+                              <small>{{post.author}}</small> <small>{{post.create_date}}</small>
                               <br>
                               {{post.text}}                            </p>
                           </div>

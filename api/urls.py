@@ -13,5 +13,6 @@ urlpatterns = [
     path('signup/', views.SignUp.as_view(), name='signup_page'),
     path('user/<int:pk>/', views.UserDetail.as_view(), name='user_detail_page'),
     path('user/<int:pk>/update', views.UpdateUser.as_view(), name='update_user_page'),
+    path('user/<int:pk>/delete_post', views.DeletePost.as_view(), name='delete_post_page'),
     path('search/', views.search_results, name='search_results'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Used to show images

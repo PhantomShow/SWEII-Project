@@ -39,6 +39,7 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
     school = models.CharField(max_length=128, blank=True)
     profile_pic = models.ImageField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True, default="No biography")
+    gpa = models.FloatField(null=True, blank=True)
 
     user_type = models.PositiveSmallIntegerField(null=True, choices=user_type_choices)
 

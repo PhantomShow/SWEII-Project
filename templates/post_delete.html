@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block bodyblock %}
+
+<h1>Delete Post</h1>
+<h3>Delete this post?</h3>
+<article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        {% if post.author.profile_pic %}
+        <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
+                style="max-width: 50px; border-radius: 50%;">
+            </div>
+        {% else %}
+        <div class="avatar"><img src='https://via.placeholder.com/250'
+            style="max-width: 50px; border-radius: 50%;">
+        </div>
+        {% endif %}
+      </p>
+    </figure>
+    <div class="media-content box">
+      <div class="content">
+        <p>
+          <strong>{{post.author.first_name}} {{post.author.last_name}}</strong> <small>{{post.author}}</small> <small>{{post.create_date}}</small>
+          <br>
+          {{post.text}}                            </p>
+      </div>
+    </div>
+  </article>
+
+<div class='container'>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="Delete Post" class="btn btn-danger">
+    </form>
+</div>
+
+{% endblock bodyblock %}

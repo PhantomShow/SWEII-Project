@@ -84,10 +84,11 @@
         <div class="modal-content">
           <p class="image is-4by3">
             {% if user_detail.profile_pic %}
-            <img src="{{ user_detail.profile_pic.url }}" alt="not found">
-          {% else %}
-            <img src='https://via.placeholder.com/250' alt="not found">
-          {% endif %}          </p>
+              <img src="{{ user_detail.profile_pic.url }}" alt="not found">
+            {% else %}
+              <img src='https://via.placeholder.com/250' alt="not found">
+            {% endif %}         
+           </p>
         </div>
         <button class='delete'></button>
       </div>
@@ -123,18 +124,20 @@
               {{ user_detail.bio }}
             </p>
           </div>
+          {% if user_detail.user_type == 1 %} <!-- Show relevent information for athlete only -->
           <div class='column is-2-tablet is-4-mobile has-text-centered'>
-            <p class='stat-val'>30</p>
-            <p class='stat-key'>searches</p>
+            <p class='stat-val'>{{ user_detail.height_ft }}'{{ user_detail.height_in }}''</p>
+            <p class='stat-key'>Height</p>
           </div>
           <div class='column is-2-tablet is-4-mobile has-text-centered'>
-            <p class='stat-val'>10</p>
-            <p class='stat-key'>likes</p>
+            <p class='stat-val'> {{ user_detail.gpa }}</p>
+            <p class='stat-key'>GPA</p>
           </div>
           <div class='column is-2-tablet is-4-mobile has-text-centered'>
-            <p class='stat-val'>3</p>
-            <p class='stat-key'>lists</p>
+            <p class='stat-val'>{{ user_detail.weight_lb }} lbs</p>
+            <p class='stat-key'>Weight</p>
           </div>
+          {% endif %}
         </div>
       </div>
       <div class='profile-options is-fullwidth is-white'>
@@ -145,39 +148,65 @@
                 <span class='icon'>
                   <i class='fa fa-list'></i>
                 </span>
-                <span>My Lists</span>
+                <span>My Posts</span>
               </a>
             </li>
             <li class='link is-active'>
               <a>
                 <span class='icon'>
-                  <i class='fa fa-thumbs-up'></i>
+                  <i class='fa fa-envelope-open-text'></i>
                 </span>
-                <span>My Likes</span>
-              </a>
-            </li>
-            <li class='link'>
-              <a>
-                <span class='icon'>
-                  <i class='fa fa-search'></i>
-                </span>
-                <span>My Searches</span>
-              </a>
-            </li>
-            <li class='link'>
-              <a>
-                <span class='icon'>
-                  <i class='fa fa-balance-scale'></i>
-                </span>
-                <span>Compare</span>
+                <span>My Details</span>
               </a>
             </li>
           </ul>
         </div>
       </div>
       <div class='columns is-mobile'>
-        <div class='column is-3-tablet is-6-mobile'>
-          <div class='card'>
+        <div class='column is-6-tablet is-6-mobile'>
+          {% for post in user_posts %}
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  {% if post.author.profile_pic %}
+                  <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
+                          style="max-width: 50px; border-radius: 50%;">
+                      </div>
+                  {% else %}
+                  <div class="avatar"><img src='https://via.placeholder.com/250'
+                      style="max-width: 50px; border-radius: 50%;">
+                  </div>
+                  {% endif %}
+                </p>
+              </figure>
+              <div class="media-content box">
+                <div class="content">
+                  <p>
+                    <strong>{{post.author.first_name}} {{post.author.last_name}}</strong> <small>{{post.author}}</small> <small>{{post.create_date}}</small>
+                    <br>
+                    {{post.text}}                            </p>
+                </div>
+                <nav class="level is-mobile">
+                  <div class="level-left">
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    {% if user_detail.pk == user.pk %}
+                    <a class="level-item" href="{% url 'api:delete_post_page' pk=post.pk %}">
+                      <span class="icon is-small has-text-danger"><i class="fas fa-ban"></i></span>
+                    </a>
+                    {% endif %}
+                  </div>
+                </nav>
+              </div>
+            </article>
+          {% empty %}
+            <p>No posts yet</p>
+          {% endfor %}
+          {% comment %} <div class='card'>
             <div class='card-image'>
               <figure class='image is-4by3'>
                 <img alt='' src='http://placehold.it/300x225'>
@@ -194,154 +223,24 @@
               <a class='card-footer-item'>Share</a>
               <a class='card-footer-item'>Delete</a>
             </footer>
-          </div>
+          </div> {% endcomment %}
           <br>
         </div>
-        <div class='column is-3-tablet is-6-mobile'>
+        <div class='column is-6-tablet is-6-mobile'>
           <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
             <div class='card-content'>
               <div class='content'>
                 <span class='tag is-dark subtitle'>#2</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
+                {% if user_detail.user_type == 0 %} <!-- If Scout -->
+                  <p>School: {{ user_detail.school }}</p>
+                {% else %} <!-- If Athlete -->
+                  <p>Interested School: {{ user_detail.school }}</p>
+                {% endif %}
+                <p id='user_email'>Contact Me: {{ user_detail.email }}</p>
               </div>
             </div>
             <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
-            </footer>
-          </div>
-          <br>
-        </div>
-        <div class='column is-3'>
-          <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
-            <div class='card-content'>
-              <div class='content'>
-                <span class='tag is-dark subtitle'>#3</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
-              </div>
-            </div>
-            <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
-            </footer>
-          </div>
-          <br>
-        </div>
-        <div class='column is-3'>
-          <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
-            <div class='card-content'>
-              <div class='content'>
-                <span class='tag is-dark subtitle'>#4</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
-              </div>
-            </div>
-            <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
-            </footer>
-          </div>
-          <br>
-        </div>
-      </div>
-      <div class='columns is-mobile'>
-        <div class='column is-3'>
-          <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
-            <div class='card-content'>
-              <div class='content'>
-                <span class='tag is-dark subtitle'>#5</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
-              </div>
-            </div>
-            <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
-            </footer>
-          </div>
-          <br>
-        </div>
-        <div class='column is-3'>
-          <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
-            <div class='card-content'>
-              <div class='content'>
-                <span class='tag is-dark subtitle'>#6</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
-              </div>
-            </div>
-            <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
-            </footer>
-          </div>
-          <br>
-        </div>
-        <div class='column is-3'>
-          <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
-            <div class='card-content'>
-              <div class='content'>
-                <span class='tag is-dark subtitle'>#7</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
-              </div>
-            </div>
-            <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
-            </footer>
-          </div>
-          <br>
-        </div>
-        <div class='column is-3'>
-          <div class='card'>
-            <div class='card-image'>
-              <figure class='image is-4by3'>
-                <img alt='' src='http://placehold.it/300x225'>
-              </figure>
-            </div>
-            <div class='card-content'>
-              <div class='content'>
-                <span class='tag is-dark subtitle'>#8</span>
-                <p>Personal Notes on the Property (can be edited and saved automatically by clicking in and clicking out of text area) - these are unique to the user - they will show up as part of a saved listings' info here - but adding notes to a property does not automatically create a saved listing. Likewise, removing this proeprty from saved listings does not auto remove the notes.</p>
-              </div>
-            </div>
-            <footer class='card-footer'>
-              <a class='card-footer-item'>Compare</a>
-              <a class='card-footer-item'>Share</a>
-              <a class='card-footer-item'>Delete</a>
+              <a class='card-footer-item' onclick="copyEmail(user_email)">!! Implement Copy Email !!</a>
             </footer>
           </div>
           <br>
