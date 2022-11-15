@@ -164,7 +164,7 @@
       <div class='columns is-mobile is-vcentered'>
         <div class='column'>
           {% for post in user_posts %}
-            <article class="media" id = "myPostContent">
+            <article class="media" name = "myPostContent">
               <figure class="media-left">
                 <p class="image is-64x64">
                   {% if post.author.profile_pic %}
@@ -203,7 +203,7 @@
               </div>
             </article>
           {% empty %}
-            <p id = "myPostContent">No posts yet</p>
+            <p name = "myPostContent">No posts yet</p>
           {% endfor %}
           <!-- hidden by default -->
           <div class='card' id = "myDetailContent" style = "display:none">

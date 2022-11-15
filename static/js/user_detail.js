@@ -38,7 +38,7 @@ $(() => {
      $('#myDetailBar').addClass('is-active');
      $('#myPostBar').removeClass('is-active');
      $("#myDetailContent").show();
-     $("#myPostContent").hide();
+     $("[name='myPostContent']").hide();
     });
   });
 
@@ -47,6 +47,6 @@ $(() => {
      $('#myPostBar').addClass('is-active');
      $('#myDetailBar').removeClass('is-active');
      $("#myDetailContent").hide();
-     $("#myPostContent").show();
+     $("[name='myPostContent']").show();
     });
   });
