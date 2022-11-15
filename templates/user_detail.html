@@ -112,7 +112,6 @@
               <span class='title-is-size-4'>@{{user_detail.username}}</span>
               <br>
               {% if user.pk == user_detail.pk %} <!-- Only user can change his own profile -->
-                <a class='button is-primary is-outlined'  id='edit-profile' style='margin: 5px 0'>
                 <a class='button is-primary is-outlined' href="{% url 'api:update_user_page' pk=user.pk %}" id='edit-profile' style='margin: 5px 0'>
 
                   Edit Profile
@@ -143,7 +142,7 @@
       <div class='profile-options is-fullwidth is-white'>
         <div class='tabs is-fullwidth is-medium'>
           <ul>
-            <li class='link'>
+            <li class='link is-active' id = "myPostBar">
               <a>
                 <span class='icon'>
                   <i class='fa fa-list'></i>
@@ -151,7 +150,7 @@
                 <span>My Posts</span>
               </a>
             </li>
-            <li class='link is-active'>
+            <li class='link' id = "myDetailBar">
               <a>
                 <span class='icon'>
                   <i class='fa fa-envelope-open-text'></i>
@@ -162,10 +161,10 @@
           </ul>
         </div>
       </div>
-      <div class='columns is-mobile'>
-        <div class='column is-6-tablet is-6-mobile'>
+      <div class='columns is-mobile is-vcentered'>
+        <div class='column'>
           {% for post in user_posts %}
-            <article class="media">
+            <article class="media" id = "myPostContent">
               <figure class="media-left">
                 <p class="image is-64x64">
                   {% if post.author.profile_pic %}
@@ -204,8 +203,25 @@
               </div>
             </article>
           {% empty %}
-            <p>No posts yet</p>
+            <p id = "myPostContent">No posts yet</p>
           {% endfor %}
+          <!-- hidden by default -->
+          <div class='card' id = "myDetailContent" style = "display:none">
+            <div class='card-content'>
+              <div class='content'>
+                <span class='tag is-dark subtitle'>#2</span>
+                {% if user_detail.user_type == 0 %} <!-- If Scout -->
+                  <p>School: {{ user_detail.school }}</p>
+                {% else %} <!-- If Athlete -->
+                  <p>Interested School: {{ user_detail.school }}</p>
+                {% endif %}
+                <p id='user_email'>Contact Me: {{ user_detail.email }}</p>
+              </div>
+            </div>
+            <footer class='card-footer'>
+              <a class='card-footer-item' onclick="copyEmail(user_email)">!! Implement Copy Email !!</a>
+            </footer>
+          </div>
           {% comment %} <div class='card'>
             <div class='card-image'>
               <figure class='image is-4by3'>
@@ -226,7 +242,8 @@
           </div> {% endcomment %}
           <br>
         </div>
-        <div class='column is-6-tablet is-6-mobile'>
+        {% comment %}
+        <div class='column is-6-tablet is-6-mobile' id = "myDetailContent" style = "display: none;">
           <div class='card'>
             <div class='card-content'>
               <div class='content'>
@@ -245,6 +262,7 @@
           </div>
           <br>
         </div>
+        {% endcomment %}
       </div>
     </div>
   </div>

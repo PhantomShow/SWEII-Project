@@ -32,3 +32,21 @@ $(() => {
     alert("Copied the text: " + copyText.value);
   }
   
+
+  $(() => {
+    $('#myDetailBar').click(function(){
+     $('#myDetailBar').addClass('is-active');
+     $('#myPostBar').removeClass('is-active');
+     $("#myDetailContent").show();
+     $("#myPostContent").hide();
+    });
+  });
+
+  $(() => {
+    $('#myPostBar').click(function(){
+     $('#myPostBar').addClass('is-active');
+     $('#myDetailBar').removeClass('is-active');
+     $("#myDetailContent").hide();
+     $("#myPostContent").show();
+    });
+  });
