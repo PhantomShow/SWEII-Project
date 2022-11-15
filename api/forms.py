@@ -6,7 +6,7 @@ from .models import Post
 class UserCreateForm(UserCreationForm):
     class Meta:
         fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name', 
-            'user_type', 'gpa', 'height_ft', 'height_in','weight_lb', 'profile_pic')
+            'user_type','school', 'gpa', 'height_ft', 'height_in','weight_lb', 'profile_pic')
         model = get_user_model()
     
     def __init__(self, *args, **kwargs):

@@ -13,7 +13,11 @@
         <div id="activity-feed-header">
             <div class="columns" id="header-columns">
                 <div class="column is-3 has-text-centered">
-                    <h3 class="title is-3">Suggested Accounts</h3>
+                    {% if user.user_type == 0 %}
+                    <h3 class="title is-3">Suggested Athletes</h3>
+                    {% else %}
+                    <h3 class="title is-3">Suggested Scouts</h3>
+                    {% endif %}
                 </div>
                 <div class="column is-6 has-text-centered">
                     <h3 class="title is-3">Social Feed</h3>
@@ -29,7 +33,7 @@
                     {% if user.user_type == 0 %}
                     {% comment %} Show Athletes if scout {% endcomment %}
                     {% for athlete in user_list %}
-                    {% if athlete.user_type == 1 %}
+                    {% if athlete.user_type == 1 and athlete.school == user.school %} <!-- Only show matching schools -->
                     <!-- card for athletes -->
                     <div class="card">
                         <div class="card-image">
@@ -73,7 +77,7 @@
 
                     {% elif user.user_type == 1 %}
                     {% for scout in user_list %}
-                    {% if scout.user_type == 0 %}
+                    {% if scout.user_type == 0 and scout.school == user.school %}
                     <!-- Cards for scouts -->
                     <div class="card">
                         <div class="card-image">

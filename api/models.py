@@ -11,6 +11,14 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
         (0, 'Scout'),
         (1, 'Athlete'),
     )
+    school_options = (
+        ('Georgia Institute of Technology', 'Georgia Institute of Technology'),
+        ('Florida International University', 'Florida International University'),
+        ('Yale', 'Yale'), 
+        ('University of Pittsburgh', 'University of Pittsburgh'),
+        ('Emory University','Emory University')
+    )
+
     height_foot_options = (
         (4, '4'),
         (5, '5'),
@@ -36,7 +44,7 @@ class CustomUser(auth.models.AbstractUser, auth.models.PermissionsMixin):
     weight_lb = models.IntegerField(default=140, blank=True)
     height_ft = models.IntegerField(choices=height_foot_options, default=5, blank=True)
     height_in = models.IntegerField(choices=height_inch_options, default=6, blank=True)
-    school = models.CharField(max_length=128, blank=True)
+    school = models.CharField(max_length=128, blank=True, choices=school_options)
     profile_pic = models.ImageField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True, default="No biography")
     gpa = models.FloatField(null=True, blank=True)
