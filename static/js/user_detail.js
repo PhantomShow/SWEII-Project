@@ -32,6 +32,14 @@ $(() => {
   //   alert("Copied the text: " + copyText.value);
   // }
   
+  $(() => {
+    $('#userEmail').click(function(){
+      regex = /\S+[a-z0-9]@[a-z0-9\.]+/img
+      copyText = $("#user_email").text().match(regex);
+      navigator.clipboard.writeText(copyText)[0];
+      alert("Copied the text: " + copyText);
+    });
+  });
 
   $(() => {
     $('#myDetailBar').click(function(){
