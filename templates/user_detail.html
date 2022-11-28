@@ -161,6 +161,7 @@
           </ul>
         </div>
       </div>
+      <!-- User Posts with Comments -->
       <div class='columns is-mobile is-vcentered'>
         <div class='column'>
           {% for post in user_posts %}
@@ -200,6 +201,34 @@
                     {% endif %}
                   </div>
                 </nav>
+                {% if post.comments.all %}
+                  {% for comment in post.comments.all %}
+                    <article class="media">
+                      <figure class="media-left">
+                        <p class="image is-64x64">
+                          {% if comment.author.profile_pic %}
+                          <div class="avatar"><img src="{{ comment.author.profile_pic.url }}"
+                                  style="max-width: 50px; border-radius: 50%;">
+                              </div>
+                          {% else %}
+                          <div class="avatar"><img src='https://via.placeholder.com/250'
+                              style="max-width: 50px; border-radius: 50%;">
+                          </div>
+                          {% endif %}
+                        </p>
+                      </figure>
+                        <div class="media-content box">
+                          <div class="content">
+                            <p>
+                                  <small>{{comment.author}}</small> <small>{{comment.create_date}}</small>
+                                  <br>
+                                  {{comment.text}}
+                              </p>
+                          </div>
+                        </div>
+                    </article>
+                  {% endfor %}
+                {% endif %}
               </div>
             </article>
           {% empty %}

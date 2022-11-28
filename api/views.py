@@ -26,14 +26,27 @@ def home_page(request):
     posts = models.Post.objects.all().order_by('-create_date')
 
     if request.method == 'POST':
-        form = forms.PostForm(request.POST)
-        if form.is_valid():
-            form.instance.author = request.user
-            form.save()
+        if 'post_submit' in request.POST:
+            post_form = forms.PostForm(request.POST)
+            if post_form.is_valid():
+                post_form.instance.author = request.user
+                post_form.save()
+                post_form = forms.PostForm()
+            comment_form = forms.CommentForm()
+        elif 'comment_submit' in request.POST:
+            comment_form = forms.CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment_form.instance.author = request.user
+                comment_father = models.Post.objects.get(pk= request.POST.get("comment_father", ""))
+                comment_form.instance.post = comment_father
+                comment_form.save()
+                comment_form = forms.CommentForm()
+            post_form = forms.PostForm()
     else:
-        form = forms.PostForm()
+        post_form = forms.PostForm()
+        comment_form = forms.CommentForm()
     
-    context = {'user_list': user_list, 'posts':posts, 'form':form}
+    context = {'user_list': user_list, 'posts':posts, 'post_form':post_form, 'comment_form':comment_form}
 
     return render(request, 'index.html', context)
 

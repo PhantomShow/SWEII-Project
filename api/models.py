@@ -64,3 +64,15 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('api:home_page')
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    text = models.TextField()
+    create_date = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse('api:home_page')
+
+    def __str__(self):
+        return f"Post Author: {self.post.author}, Comment Author: {self.author}"

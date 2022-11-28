@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import Post
+from .models import Post, Comment
 
 class UserCreateForm(UserCreationForm):
     class Meta:
@@ -29,4 +29,9 @@ class UserEditForm(ModelForm):
 class PostForm(ModelForm):
     class Meta:
         model = Post
+        fields = ('text',)
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
         fields = ('text',)

@@ -155,13 +155,13 @@
                                   <div class="field">
                                     <p class="control">
                                       <!-- <textarea class="textarea" placeholder="Start a post"></textarea> -->
-                                      {% render_field form.text class+="input is-large" placeholder="Start a post"%}
+                                      {% render_field post_form.text class+="input is-large" placeholder="Start a post"%}
                                     </p>
                                   </div>
                                   <nav class="level">
                                     <div class="level-left">
                                       <div class="level-item">
-                                        <input type="submit" value="Post" class="button is-info">
+                                        <input type="submit" value="Post" class="button is-info" name='post_submit'>
                                     </div>
                                     </div>
                                     <div class="level-right">
@@ -201,41 +201,6 @@
                     <br>
                     <!-- generated posts -->
                     {% for post in posts %}
-                    <!-- <div class="box message-preview">
-                        <div class="top">
-                            {% if post.author.profile_pic %}
-                            <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
-                                    style="max-width: 50px; border-radius: 50%;">
-                                </div>
-                            {% else %}
-                            <div class="avatar"><img src='https://via.placeholder.com/250'
-                                style="max-width: 50px; border-radius: 50%;">
-                            </div>
-                            {% endif %}
-                            <div class="address">
-                                <div>{{post.author.first_name}} {{post.author.last_name}}</div>
-                                <div>{{post.author}}</div>
-                            </div>
-                            <hr>
-                            <div class="content">
-                                <p>{{post.text}}</p><br>
-                                <p>{{post.create_date}}</p>
-                                <nav class="level is-mobile">
-                                    <div class="level-left">
-                                      <a class="level-item">
-                                        <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                                      </a>
-                                      <a class="level-item">
-                                        <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                                      </a>
-                                      <a class="level-item">
-                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                      </a>
-                                    </div>
-                                  </nav>
-                            </div>
-                        </div>
-                    </div> -->
                     <article class="media">
                         <figure class="media-left">
                           <p class="image is-64x64">
@@ -271,8 +236,68 @@
                               </a>
                             </div>
                           </nav>
-                        </div>
-                      </article>
+                        {% if post.comments.all %}
+                        {% for comment in post.comments.all %}
+                            <article class="media">
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                      {% if comment.author.profile_pic %}
+                                      <div class="avatar"><img src="{{ comment.author.profile_pic.url }}"
+                                              style="max-width: 50px; border-radius: 50%;">
+                                          </div>
+                                      {% else %}
+                                      <div class="avatar"><img src='https://via.placeholder.com/250'
+                                          style="max-width: 50px; border-radius: 50%;">
+                                      </div>
+                                      {% endif %}
+                                    </p>
+                                </figure>
+                                <div class="media-content box">
+                                    <div class="content">
+                                      <p>
+                                            <small>{{comment.author}}</small> <small>{{comment.create_date}}</small>
+                                            <br>
+                                            {{comment.text}}
+                                        </p>
+                                    </div>
+                            </div>
+                            </article>
+                        {% endfor %}
+                        {% endif %}
+                        <!--User Add Comment -->
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                  {% if user.profile_pic %}
+                                  <div class="avatar"><img src="{{ user.profile_pic.url }}"
+                                          style="max-width: 50px; border-radius: 50%;">
+                                      </div>
+                                  {% else %}
+                                  <div class="avatar"><img src='https://via.placeholder.com/250'
+                                      style="max-width: 50px; border-radius: 50%;">
+                                  </div>
+                                  {% endif %}
+                                </p>
+                            </figure>
+                            <form method="POST" enctype="multipart/form-data" id='add_comment_form'>
+                                {% csrf_token %}
+                                <div class="field">
+                                    <p class="control">
+                                        <input type="hidden" name="comment_father" value={{post.pk}}>
+                                        {% render_field comment_form.text class+="input is-large" default="Add Comment"%}
+                                    </p>
+                                </div>
+                                <nav class="level">
+                                    <div class="level-left">
+                                        <div class="level-item">
+                                        <input type="submit" value="Comment" class="button is-info" name="comment_submit"/>
+                                    </div>
+                                </nav>
+                            </form>
+                            
+                        </article>
+                    </div>
+                    </article>
                     {% endfor %}
                 </div>
                 <div class="column is-4">
