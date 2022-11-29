@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
@@ -83,7 +84,7 @@ class DeletePost(DeleteView):
 def search_results(request):
     if request.method == 'POST':
         target = request.POST['searchQueryInput']
-        users = models.CustomUser.objects.filter(username__contains=target)
+        users = models.CustomUser.objects.filter( Q(username__contains=target) | Q(school__contains=target) )
         return render(request, 'search_results.html', {'target':target, 'users':users})
     
     else:
