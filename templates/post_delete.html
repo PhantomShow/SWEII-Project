@@ -15,16 +15,16 @@
       <div class="box">
         <div class="media">
           <figure class="media-left">
-            <p class="image is-64x64">
+            
               {% if post.author.profile_pic %}
             <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
-                style="max-width: 50px; border-radius: 50%;">
+              style="width: 64px; height: 64px;">
             </div>
             {% else %}
-            <div class="avatar"><img src='https://via.placeholder.com/250' style="max-width: 50px; border-radius: 50%;">
+            <div class="avatar"><img src='https://via.placeholder.com/250' style="width: 64px; height: 64px;">
             </div>
             {% endif %}
-            </p>
+            
           </figure>
           <div class="media-content">
             <div class="content">
@@ -55,10 +55,10 @@
       <figure class="media-left">
         <p class="image is-64x64">
           {% if post.author.profile_pic %}
-        <div class="avatar"><img src="{{ post.author.profile_pic.url }}" style="max-width: 50px; border-radius: 50%;">
+        <div class="avatar"><img src="{{ post.author.profile_pic.url }}" style="width: 64px; height: 64px;">
         </div>
         {% else %}
-        <div class="avatar"><img src='https://via.placeholder.com/250' style="max-width: 50px; border-radius: 50%;">
+        <div class="avatar"><img src='https://via.placeholder.com/250' style="width: 64px; height: 64px;">
         </div>
         {% endif %}
         </p>

@@ -167,17 +167,17 @@
           {% for post in user_posts %}
             <article class="media" name = "myPostContent">
               <figure class="media-left">
-                <p class="image is-64x64">
+                <!-- <p class="image is-64x64"> -->
                   {% if post.author.profile_pic %}
                   <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
-                          style="max-width: 50px; border-radius: 50%;">
+                      style="width: 64px; height: 64px;">
                       </div>
                   {% else %}
                   <div class="avatar"><img src='https://via.placeholder.com/250'
-                      style="max-width: 50px; border-radius: 50%;">
+                      style="width: 64px; height: 64px;">
                   </div>
                   {% endif %}
-                </p>
+                <!-- </p> -->
               </figure>
               <div class="media-content box">
                 <div class="content">
@@ -205,17 +205,17 @@
                   {% for comment in post.comments.all %}
                     <article class="media">
                       <figure class="media-left">
-                        <p class="image is-64x64">
+                        <!-- <p class="image is-64x64"> -->
                           {% if comment.author.profile_pic %}
                           <div class="avatar"><img src="{{ comment.author.profile_pic.url }}"
-                                  style="max-width: 50px; border-radius: 50%;">
+                              style="width: 64px; height: 64px;">
                               </div>
                           {% else %}
                           <div class="avatar"><img src='https://via.placeholder.com/250'
-                              style="max-width: 50px; border-radius: 50%;">
+                              style="width: 64px; height: 64px;">
                           </div>
                           {% endif %}
-                        </p>
+                        <!-- </p> -->
                       </figure>
                         <div class="media-content box">
                           <div class="content">
@@ -238,7 +238,6 @@
           <div class='card' id = "myDetailContent" style = "display:none">
             <div class='card-content'>
               <div class='content'>
-                <span class='tag is-dark subtitle'>#2</span>
                 {% if user_detail.user_type == 0 %} <!-- If Scout -->
                   <p>School: {{ user_detail.school }}</p>
                 {% else %} <!-- If Athlete -->
