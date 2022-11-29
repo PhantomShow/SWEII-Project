@@ -144,9 +144,9 @@
                                 <figure class="media-left">
                                   <p class="image is-64x64">
                                     {% if user.profile_pic %}
-                                    <img class = "is-rounded" src="{{ user.profile_pic.url }}" alt="not found">
+                                    <img src="{{ user.profile_pic.url }}" alt="not found">
                                     {% else %}
-                                    <img class = "is-rounded" src='https://via.placeholder.com/250' alt="not found">
+                                    <img src='https://via.placeholder.com/250' alt="not found">
                                     {% endif %}                                     </p>
                                 </figure>
                                 <form method="post" enctype="multipart/form-data">
@@ -188,13 +188,13 @@
                         </div>
                         <!-- <footer class="card-footer">
                             <div class="card-footer-item">
-                                <div class="button is-rounded">Create Post</div>
+                                <div class="button ">Create Post</div>
                             </div>
                             <div class="card-footer-item">
-                                <div class="button is-rounded">Add Media</div>
+                                <div class="button ">Add Media</div>
                             </div>
                             <div class="card-footer-item">
-                                <div class="button is-rounded">...</div>
+                                <div class="button ">...</div>
                             </div>
                         </footer> -->
                     </div>
@@ -205,12 +205,14 @@
                         <figure class="media-left">
                           <p class="image is-64x64">
                             {% if post.author.profile_pic %}
-                            <div class="avatar"><img src="{{ post.author.profile_pic.url }}"
-                                    style="max-width: 50px; border-radius: 50%;">
+                            <div class="avatar ">
+                                <!-- <img src="{{ post.author.profile_pic.url }}"
+                                    style="max-width: 50px; border-radius: 50%;"> -->
+                                    <img class = "" src="{{ post.author.profile_pic.url }}" style = "height: 64px; width: 64px;">
                                 </div>
                             {% else %}
                             <div class="avatar"><img src='https://via.placeholder.com/250'
-                                style="max-width: 50px; border-radius: 50%;">
+                                style="width: 64px; height: 64px;">
                             </div>
                             {% endif %}
                           </p>
@@ -240,17 +242,17 @@
                         {% for comment in post.comments.all %}
                             <article class="media">
                                 <figure class="media-left">
-                                    <p class="image is-64x64">
+                                    <!-- <p class="image is-64x64"> -->
                                       {% if comment.author.profile_pic %}
                                       <div class="avatar"><img src="{{ comment.author.profile_pic.url }}"
-                                              style="max-width: 50px; border-radius: 50%;">
+                                            style="width: 64px; height: 64px;">
                                           </div>
                                       {% else %}
                                       <div class="avatar"><img src='https://via.placeholder.com/250'
-                                          style="max-width: 50px; border-radius: 50%;">
+                                            style="width: 64px; height: 64px;">
                                       </div>
                                       {% endif %}
-                                    </p>
+                                    <!-- </p> -->
                                 </figure>
                                 <div class="media-content box">
                                     <div class="content">
@@ -267,17 +269,17 @@
                         <!--User Add Comment -->
                         <article class="media">
                             <figure class="media-left">
-                                <p class="image is-64x64">
+                                <!-- <p class="image is-64x64"> -->
                                   {% if user.profile_pic %}
                                   <div class="avatar"><img src="{{ user.profile_pic.url }}"
-                                          style="max-width: 50px; border-radius: 50%;">
+                                        style="width: 64px; height: 64px;">
                                       </div>
                                   {% else %}
                                   <div class="avatar"><img src='https://via.placeholder.com/250'
-                                      style="max-width: 50px; border-radius: 50%;">
+                                        style="width: 64px; height: 64px;">
                                   </div>
                                   {% endif %}
-                                </p>
+                                <!-- </p> -->
                             </figure>
                             <form method="POST" enctype="multipart/form-data" id='add_comment_form'>
                                 {% csrf_token %}
